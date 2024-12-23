@@ -1,0 +1,239 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="custom.css">
+    <title>Gracie Page</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+
+@media (max-width: 600px) {
+            .timer-container{
+                margin-top:-20px;
+            }
+            .background{
+                height:900px;
+            }
+            #musicbox{
+                margin-top:30px;
+            }
+            .timer-display{
+                font-size:80px;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="background"></div>
+    <div id="bar">
+        <h1 id="desktitle">Gracie's Study Spot</h1>
+        <h1 id="mobtitle">Study</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="procrastinate.html">Procrastinate</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <!-- Timer Section -->
+        <div class="timer-container">
+            <!-- Timer Display -->
+            <div class="timer-display">
+                <!-- Time control buttons (stacked next to timer) -->
+                <div class="updown">
+                    <button id="increaseTime" class="updown-btn">▲</button>
+                    <button id="decreaseTime" class="updown-btn">▼</button>
+                </div>
+                <span id="timer">25:00</span>
+            </div>
+
+            <!-- Timer Controls -->
+            <div class="timer-controls">
+                <button id="startBtn" class="control-btn">Start</button>
+                <button id="resetBtn" class="control-btn">Reset</button>
+            </div>
+
+            <script src="timer.js"></script>
+        </div>
+
+        <div class="slider">
+            <input type="range" id="blurSlider" min="0" max="12" step="1" value="6">
+            <label for="blurSlider"> <br>Adjust Background Blur Level</label>
+            <script src="slider.js"></script>
+        </div>
+
+        <div id="musicbox">
+            <h2 style="color:#ffffff">Music Controls</h2>
+            <div style="margin-bottom:10px; height:1px; width:20%; background-color:#ffffff; display:block;"></div>
+
+            <div id="playlistButtons">
+                <!-- Button to show Spotify playlist 1 -->
+                <button id="showPlaylistBtn1" class="control-btn">Mexico</button>
+                <!-- Button to show Spotify playlist 2 -->
+                <button id="showPlaylistBtn2" class="control-btn">Quiet</button>
+                <!-- Button to show Spotify playlist 3 -->
+                <button id="showPlaylistBtn3" class="control-btn">Guitar</button>
+            </div>
+        </div>
+        <!-- Container for Spotify playlists -->
+        <div id="spotifyPlaylists">
+            <div id="spotifyPlaylist1" style="display: none;">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/3JJ2OEsaUf028j1V0gkNrz?utm_source=generator&theme=0"
+                    width="100%" height="152" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div id="spotifyPlaylist2" style="display: none;">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/40ER4ARZWNkvnmpevMd825?utm_source=generator&theme=0"
+                    width="100%" height="152" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div id="spotifyPlaylist3" style="display: none;">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/26HPQQ55ctOuzrIKvIMhpd?utm_source=generator&theme=0"
+                    width="100%" height="152" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <script>
+            const showPlaylistBtn1 = document.getElementById('showPlaylistBtn1');
+            const spotifyPlaylist2 = document.getElementById('spotifyPlaylist2');
+            const spotifyPlaylist3 = document.getElementById('spotifyPlaylist3');
+
+            showPlaylistBtn1.addEventListener('click', function () {
+                if (spotifyPlaylist1.style.display === 'none') {
+                    spotifyPlaylist1.style.display = 'block';
+                    showPlaylistBtn1.textContent = 'Hide Playlist';
+                } else {
+                    spotifyPlaylist1.style.display = 'none';
+                    showPlaylistBtn1.textContent = 'Mexico';
+                }
+            });
+
+            showPlaylistBtn2.addEventListener('click', function () {
+                if (spotifyPlaylist2.style.display === 'none') {
+                    spotifyPlaylist2.style.display = 'block';
+                    showPlaylistBtn2.textContent = 'Hide Playlist';
+                } else {
+                    spotifyPlaylist2.style.display = 'none';
+                    showPlaylistBtn2.textContent = 'Quiet';
+                }
+            });
+
+            showPlaylistBtn3.addEventListener('click', function () {
+                if (spotifyPlaylist3.style.display === 'none') {
+                    spotifyPlaylist3.style.display = 'block';
+                    showPlaylistBtn3.textContent = 'Hide Playlist';
+                } else {
+                    spotifyPlaylist3.style.display = 'none';
+                    showPlaylistBtn3.textContent = 'Guitar';
+                }
+            });
+        </script>
+
+        </div>
+
+
+        <!-- AMBIENT SOUNDS -->
+
+        <div id="ambientbox">
+            <h2 style="color:#ffffff">Ambience Controls</h2>
+            <div style="margin-bottom:10px; height:1px; width:20%; background-color:#ffffff; display:block;"></div>
+
+            <div id="ambientbuttons">
+                <button id="rainBtn" class="control-btn">Rain</button>
+                <button id="darkBtn" class="control-btn">Dark</button>
+                <button id="fireBtn" class="control-btn">Fire</button>
+                <button id="oceanBtn" class="control-btn">Ocean</button>
+            </div>
+
+            <!-- Volume Control -->
+            <label for="volumeControl">Volume:</label>
+            <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5">
+
+            <!-- Audio elements -->
+            <audio id="rainAudio" src="audio/rain.mp3" preload="auto"></audio>
+            <audio id="darkAudio" src="audio/dark.mp3" preload="auto"></audio>
+            <audio id="fireAudio" src="audio/fire.mp3" preload="auto"></audio>
+            <audio id="oceanAudio" src="audio/ocean.mp3" preload="auto"></audio>
+
+            <script>
+                const rainBtn = document.getElementById('rainBtn');
+                const darkBtn = document.getElementById('darkBtn');
+                const fireBtn = document.getElementById('fireBtn');
+                const oceanBtn = document.getElementById('oceanBtn');
+
+                const rainAudio = document.getElementById('rainAudio');
+                const darkAudio = document.getElementById('darkAudio');
+                const fireAudio = document.getElementById('fireAudio');
+                const oceanAudio = document.getElementById('oceanAudio');
+
+                const volumeControl = document.getElementById('volumeControl');
+
+                // Set initial volume
+                [rainAudio, darkAudio, fireAudio, oceanAudio].forEach(audio => {
+                    audio.volume = volumeControl.value;
+                });
+
+                // Function to toggle play/pause and loop
+                function togglePlayPause(audio, button, label) {
+                    if (audio.paused) {
+                        // Pause all other audios and reset button text
+                        [rainAudio, darkAudio, fireAudio, oceanAudio].forEach((a, index) => {
+                            if (a !== audio) {
+                                a.pause();
+                                a.currentTime = 0;
+                            }
+                        });
+                        [rainBtn, darkBtn, fireBtn, oceanBtn].forEach(btn => {
+                            if (btn !== button) {
+                                btn.textContent = btn.id.replace('Btn', '').charAt(0).toUpperCase() + btn.id.replace('Btn', '').slice(1);
+                            }
+                        });
+
+                        // Play the selected audio
+                        audio.play();
+                        audio.loop = true;
+                        button.textContent = 'Pause';
+                    } else {
+                        // Pause the audio
+                        audio.pause();
+                        button.textContent = label;
+                    }
+                }
+
+                // Event listeners for buttons
+                rainBtn.addEventListener('click', () => togglePlayPause(rainAudio, rainBtn, 'Rain'));
+                darkBtn.addEventListener('click', () => togglePlayPause(darkAudio, darkBtn, 'Dark'));
+                fireBtn.addEventListener('click', () => togglePlayPause(fireAudio, fireBtn, 'Fire'));
+                oceanBtn.addEventListener('click', () => togglePlayPause(oceanAudio, oceanBtn, 'Ocean'));
+
+                // Volume control slider event listener
+                volumeControl.addEventListener('input', function () {
+                    [rainAudio, darkAudio, fireAudio, oceanAudio].forEach(audio => {
+                        audio.volume = volumeControl.value;
+                    });
+                });
+            </script>
+
+        </div>
+
+    </main>
+
+    <!-- Snowflakes Container -->
+    <div id="snowflakes"></div>
+
+    <script src="snowfall.js"></script>
+</body>
+
+</html>

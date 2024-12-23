@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="custom.css">
+    <title>Gracie Page</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        #resetBtn {
+            display: none;
+        }
+
+        #startBtn {
+            display: none;
+        }
+
+        .updown {
+            display: none;
+        }
+
+        .timer-display {
+            transform: translateX(-0px);
+        }
+
+        #snakeGame {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #gameCanvas {
+            border: 1px solid black;
+        }
+
+        #retryBtn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #6c7180;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #retryBtn:hover {
+            background-color: #868b99;
+        }
+
+        .mobile-controls {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .horizontal-controls {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 600px) {
+            .mobile-controls {
+                display: block;
+            }
+
+            #gameCanvas {
+                width: 90%;
+                height: auto;
+            }
+
+            #retryBtn {
+                margin-top: 10px;
+            }
+            .timer-container{
+                margin-top:-20px;
+            }
+            .background{
+                height:1000px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <div id="bar">
+        <h1 id="desktitle">Gracie's Study Spot</h1>
+        <h1 id="mobtitle">Study</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="procrastinate.html">Procrastinate</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                let timeLeft = 5 * 60; // Set timer to 5 minutes
+                const timerDisplay = document.getElementById('timer');
+                const tone = new Audio('tone.mp3'); // Ensure the path is correct
+
+                function updateTimerDisplay() {
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                }
+
+                updateTimerDisplay();
+                const countdown = setInterval(function () {
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        alert("Time's up!");
+                        tone.play().catch(error => {
+                            console.error('Error playing tone:', error);
+                        });
+                        return;
+                    }
+                    timeLeft--;
+                    updateTimerDisplay();
+                }, 1000); // Update every second
+            });
+        </script>
+
+        <div class="timer-container">
+            <!-- Timer Display -->
+            <div class="timer-display">
+                <!-- Time control buttons (stacked next to timer) -->
+                <div class="updown">
+                    <button id="increaseTime" class="updown-btn">▲</button>
+                    <button id="decreaseTime" class="updown-btn">▼</button>
+                </div>
+                <span id="timer">5:00</span>
+            </div>
+
+            <!-- Timer Controls -->
+            <div class="timer-controls">
+                <button id="startBtn" class="control-btn">Start</button>
+                <button id="resetBtn" class="control-btn">Reset</button>
+            </div>
+
+            <script src="timer.js"></script>
+        </div>
+
+        <div id="snakeGame">
+            <h2 style="color:white;">Snake Game</h2>
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+            <!-- Directional Buttons for Mobile -->
+            <div class="mobile-controls">
+                <button id="upBtn" class="control-btn">Up</button>
+                <div class="horizontal-controls">
+                    <button id="leftBtn" class="control-btn">Left</button>
+                    <button id="rightBtn" class="control-btn">Right</button>
+                </div>
+                <button id="downBtn" class="control-btn">Down</button>
+            </div>
+
+            <button id="retryBtn">Retry</button>
+        </div>
+
+        <script>
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            const box = 20;
+            const gap = 10; // Define the gap for the score
+            let snake;
+            let food;
+            let score;
+            let d;
+            let game;
+
+            function initGame() {
+                snake = [];
+                snake[0] = { x: 9 * box, y: 10 * box };
+                food = {
+                    x: Math.floor(Math.random() * 19 + 1) * box,
+                    y: Math.floor(Math.random() * 19 + 1) * box
+                };
+                score = 0;
+                d = null;
+                clearInterval(game);
+                game = setInterval(draw, 100);
+            }
+
+            document.addEventListener('keydown', direction);
+
+            function direction(event) {
+                if (event.keyCode == 37 && d != 'RIGHT') {
+                    d = 'LEFT';
+                } else if (event.keyCode == 38 && d != 'DOWN') {
+                    d = 'UP';
+                } else if (event.keyCode == 39 && d != 'LEFT') {
+                    d = 'RIGHT';
+                } else if (event.keyCode == 40 && d != 'UP') {
+                    d = 'DOWN';
+                }
+            }
+
+            // Event listeners for mobile controls
+            document.getElementById('upBtn').addEventListener('click', () => { if (d != 'DOWN') d = 'UP'; });
+            document.getElementById('leftBtn').addEventListener('click', () => { if (d != 'RIGHT') d = 'LEFT'; });
+            document.getElementById('rightBtn').addEventListener('click', () => { if (d != 'LEFT') d = 'RIGHT'; });
+            document.getElementById('downBtn').addEventListener('click', () => { if (d != 'UP') d = 'DOWN'; });
+
+            function collision(head, array) {
+                for (let i = 0; i < array.length; i++) {
+                    if (head.x == array[i].x && head.y == array[i].y) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < snake.length; i++) {
+                    const colorValue = 155 - (i * 10); // Gradually darker pink
+                    ctx.fillStyle = `rgb(255, ${colorValue}, ${colorValue})`;
+                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                    ctx.strokeStyle = 'black';
+                    ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+                }
+
+                ctx.fillStyle = 'rgb(255, 240, 240)'; // Slightly tinted pink for the fruit
+                ctx.fillRect(food.x, food.y, box, box);
+
+                let snakeX = snake[0].x;
+                let snakeY = snake[0].y;
+
+                if (d == 'LEFT') snakeX -= box;
+                if (d == 'UP') snakeY -= box;
+                if (d == 'RIGHT') snakeX += box;
+                if (d == 'DOWN') snakeY += box;
+
+                if (snakeX == food.x && snakeY == food.y) {
+                    score++;
+                    food = {
+                        x: Math.floor(Math.random() * 19 + 1) * box,
+                        y: Math.floor(Math.random() * 19 + 1) * box
+                    };
+                } else {
+                    snake.pop();
+                }
+
+                let newHead = {
+                    x: snakeX,
+                    y: snakeY
+                };
+
+                if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
+                    clearInterval(game);
+                }
+
+                snake.unshift(newHead);
+
+                ctx.fillStyle = 'white';
+                ctx.font = '20px Arial';
+                ctx.fillText(score, gap, gap + 20); // Draw the score with the defined gap
+            }
+
+            document.getElementById('retryBtn').addEventListener('click', initGame);
+
+            initGame(); // Initialize the game when the page loads
+        </script>
+        <div class="slider">
+            <input type="range" id="blurSlider" min="0" max="12" step="1" value="6">
+            <label for="blurSlider"> <br>Adjust Background Blur Level</label>
+            <script src="slider.js"></script>
+        </div>
+    </main>
+</body>
+
+</html>

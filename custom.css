@@ -1,0 +1,204 @@
+@charset "utf-8";
+
+/* BLUR SLIDER */
+.slider {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+label {
+    color: #ffffff;
+    font-size: 1.2em;
+    margin-top: -10px;
+}
+
+/* Style the range input itself */
+#blurSlider {
+    width: 300px;
+    /* Set the width of the slider */
+    -webkit-appearance: none;
+    /* Remove default styling for WebKit browsers (Chrome, Safari) */
+    appearance: none;
+    /* Remove default styling for other browsers */
+    background-color: transparent;
+    /* Set transparent background for the slider itself */
+    height: 8px;
+    /* Set the height of the track */
+    border-radius: 5px;
+    /* Round the corners of the track */
+    outline: none;
+    /* Remove default outline when focused */
+}
+
+/* Style the slider track (the part the thumb moves along) */
+#blurSlider::-webkit-slider-runnable-track {
+    height: 10px;
+    border-radius: 5px;
+    background: #6c7180;
+    /* Light grey track */
+}
+
+#blurSlider::-webkit-slider-thumb {
+    transform: translateY(-4px);
+    -webkit-appearance: none;
+    /* Remove default thumb appearance in WebKit browsers */
+    appearance: none;
+    /* Remove default thumb appearance */
+    width: 20px;
+    /* Set thumb width */
+    height: 20px;
+    /* Set thumb height */
+    background-color: #ffffff;
+    /* Set the thumb color */
+    border: 2px solid white;
+    /* Thumb border */
+    border-radius: 50%;
+    /* Make the thumb circular */
+    cursor: pointer;
+    /* Add a pointer cursor on hover */
+    transition: background-color 0.3s ease;
+    /* Smooth transition when hovered */
+}
+
+/* Hover effect for the thumb */
+#blurSlider::-webkit-slider-thumb:hover {
+    background-color: #6c7180;
+    /* Darker thumb color when hovered */
+}
+
+
+/* TIMER */
+
+
+#timer {
+    color: #ffffff;
+}
+
+.timer-container {
+    margin-top:15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-display {
+    display: flex;
+    gap: 15px;
+    transform: translateX(-15px);
+    align-items: center;
+    font-size: 100px;
+    font-weight: bold;
+}
+
+.timer-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.updown {
+    display: flex;
+    flex-direction: column;
+    /* Stack the buttons vertically */
+    gap: 10px;
+    /* Space between the buttons */
+    align-items: center;
+    /* Center the buttons horizontally */
+}
+
+.updown-btn {
+    background-color: #6c7180;
+    border: 2px solid white;
+    padding: 5px 10px;
+    font-size: 10px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.updown-btn:hover {
+    background-color: #868b99;
+}
+
+.control-btn {
+    background-color: #6c7180;
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+    background-color: #868b99;
+}
+
+#musicbox {
+    margin-top:100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#playlistButtons {
+    display: flex;
+    gap: 10px; /* Adjust the gap as needed */
+    justify-content: center; /* Center the buttons horizontally */
+    margin-bottom: 20px; /* Add some space below the buttons */
+}
+
+#spotifyPlaylists{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    overflow:hidden;
+}
+/* AMBIENT SOUNDS */
+#ambientbox {
+    margin-top:50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#ambientButtons {
+    display: flex;
+    gap: 10px; /* Adjust the gap as needed */
+    justify-content: center; /* Center the buttons horizontally */
+    margin-bottom: 20px; /* Add some space below the buttons */
+}
+#loopBtn{
+    margin-bottom:20px;
+    background-color: #6c7180;
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#loopBtn:hover {
+    background-color: #868b99;
+}
+
+/* SNAKE */
+
+#snake{
+    margin-top:-160px;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

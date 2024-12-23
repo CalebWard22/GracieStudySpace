@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+* a{
+    text-decoration: none;
+    color:white;
+}
+
+body {
+    background-color: #4d5469;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("images/background.jpg"); /* Your background image */
+    background-size: cover;
+    background-position: center;
+    filter: blur(6px); /* No initial blur */
+    transition: filter 0.2s ease-in-out;
+    z-index: -1; /* Ensure it stays behind the content */
+}
+
+h1 {
+    color: #ffffff;
+}
+
+#bar{
+    display:flex;
+    position:fixed;
+    top:0px;
+    width:100%;
+    justify-content:space-around;
+    align-items:center;
+    background-color:#6c7180;
+    box-shadow: 0 0 10px 10px #6c7180;
+    padding:50px 0px;
+    z-index:1000;
+}
+#bar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Use flexbox for proper alignment */
+    gap: 10px; /* Add spacing between buttons */
+}
+
+#bar ul li {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid white; /* Button border */
+    border-radius: 20px; /* Rounded corners */
+    font-family: Arial, sans-serif; /* Clean font style */
+    color: white; /* Text color */
+    cursor: pointer; /* Pointer cursor for buttons */
+    text-align: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#bar ul li:hover{
+    background-color:#868b99;
+}
+
+main{
+    padding-top:200px;
+    width:100%;
+    height:100%;
+}
+#mobtitle{
+    display:none;
+}
+
+@media (max-width: 600px) {
+#desktitle{
+    display:none;
+}
+#mobtitle{
+    display:block;
+}
+}
